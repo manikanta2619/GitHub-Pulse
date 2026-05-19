@@ -94,7 +94,7 @@ const UserCard = ({ user }) => {
         )}
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mt-6">
+        <div className="grid grid-cols-4 gap-4 mt-6">
           <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center transition-transform duration-200 hover:scale-105">
             <UsersIcon className="w-5 h-5 text-indigo-500 mx-auto mb-1" />
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -122,6 +122,16 @@ const UserCard = ({ user }) => {
             </h3>
             <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Repos
+            </p>
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 text-center transition-transform duration-200 hover:scale-105">
+            <div className="text-indigo-500 text-lg font-semibold mx-auto mb-1">@</div>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {user.login}
+            </h3>
+            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              Username
             </p>
           </div>
         </div>

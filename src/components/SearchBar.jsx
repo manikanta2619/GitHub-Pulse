@@ -12,51 +12,56 @@ const XIcon = () => (
 
 const SearchBar = ({ username, setUsername, handleSearch }) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-8">
-      <div className="relative w-full sm:w-80 group">
-        {/* Glow effect on focus */}
-        <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 opacity-0 group-focus-within:opacity-75 blur transition-opacity duration-500" />
+    <div className="w-full max-w-4xl mx-auto mb-8">
+      <div className="rounded-[32px] border border-slate-200/80 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)] dark:border-slate-700/80 dark:bg-slate-900/95 p-5 sm:p-6">
+        <label htmlFor="search-input" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
+          GitHub username
+        </label>
 
-        <div className="relative flex items-center bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden transition-colors">
-          <div className="ml-4 text-gray-400 flex-shrink-0">
-            <SearchIcon />
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="relative flex-1 w-full group">
+            <div className="absolute -inset-0.5 rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 blur" />
+            <div className="relative flex items-center rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-sm transition-colors duration-200 dark:border-slate-700 dark:bg-slate-950">
+              <div className="text-slate-400 dark:text-slate-500 flex-shrink-0">
+                <SearchIcon />
+              </div>
+              <input
+                type="text"
+                id="search-input"
+                placeholder="e.g. facebook"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
+                className="w-full bg-transparent pl-3 pr-2 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
+                autoComplete="off"
+                spellCheck="false"
+              />
+              {username && (
+                <button
+                  type="button"
+                  onClick={() => setUsername("")}
+                  className="ml-2 rounded-full p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                  aria-label="Clear search"
+                >
+                  <XIcon />
+                </button>
+              )}
+            </div>
           </div>
 
-          <input
-            type="text"
-            placeholder="Search GitHub username..."
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch();
-              }
-            }}
-            className="flex-1 py-3.5 px-3 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none text-sm font-medium"
-            autoComplete="off"
-            spellCheck="false"
-          />
-
-          {username && (
-            <button
-              type="button"
-              onClick={() => setUsername("")}
-              className="p-2 mr-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-              aria-label="Clear search"
-            >
-              <XIcon />
-            </button>
-          )}
+          <button
+            onClick={handleSearch}
+            disabled={!username.trim()}
+            className="inline-flex h-12 items-center justify-center rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 transition hover:from-indigo-500 hover:to-purple-500 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            Search
+          </button>
         </div>
       </div>
-
-      <button
-        onClick={handleSearch}
-        disabled={!username.trim()}
-        className="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none text-sm"
-      >
-        Search
-      </button>
     </div>
   );
 };
